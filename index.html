@@ -169,6 +169,8 @@
 
                 if (correctNetwork != currentNetId){
                     $("#addNetworkButton").show();
+                } else {
+                    $("#addNetworkButton").hide();
                 }
             } else {
                 $("#getMetaMaskButton").show();
@@ -267,6 +269,12 @@
             $("#signOutButton").on( "click", function(){
                 window.location.reload();
             });
+
+            if (correctNetwork != currentNetId){
+                $("#addNetworkButton").show();
+            } else {
+                $("#addNetworkButton").hide();
+            }
         };
 
         window.addEventListener('DOMContentLoaded', initialize);
