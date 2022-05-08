@@ -149,7 +149,7 @@
 
         // vars
         let detectedNetwork
-        let correctNetwork = '80001' // polygon mumbai testnet = 80001, polygon mainnet 137
+        let correctNetwork = 80001 // polygon mumbai testnet = 80001, polygon mainnet 137
         let contractAddr = "0xEFF30196f92b4e1140C55571Fd39faCC7337eB70"
         let userAccount 
 
@@ -180,6 +180,22 @@
             } else {
                 console.log('Please install MetaMask!');
             }
+        }
+
+        /**********************************************************/
+        /* Handle chain (network) and chainChanged (per EIP-1193) */
+        /**********************************************************/
+
+        const chainId = await ethereum.request({ method: 'eth_chainId' });
+        console.log(chainId)
+        handleChainChanged(chainId);
+
+        ethereum.on('chainChanged', handleChainChanged);
+
+        function handleChainChanged(_chainId) {
+            console.log(_chainId)
+            // We recommend reloading the page, unless you must do otherwise
+            window.location.reload();
         }
 
         // Note that this event is emitted on page load.
