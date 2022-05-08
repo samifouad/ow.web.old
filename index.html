@@ -179,7 +179,7 @@
                     detectedNetwork === correctNetwork ?
                     console.log("You're on the correct network")
                         : 
-                    $("#addNetworkButton").show();
+                    $("#addNetworkButton").show()
                     console.log("You're on the wrong network")
                     console.log(ethereum.networkVersion +' detected when you need to be on '+ correctNetwork)
                 } else {
@@ -214,6 +214,8 @@
                 } else if (accounts[0] !== userAccount) {
                     userAccount = accounts[0];
                     // Do any other work!
+                    $("#connectButton").hide();
+                    $("#signOutButton").show();
                     console.log(userAccount)
                 }
             }
