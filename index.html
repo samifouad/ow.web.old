@@ -12,7 +12,7 @@
 <body>
     <div style="width:50%; margin-left:auto; margin-right: auto; margin-top: 10%;">
         <button id="connectButton">Connect</button>
-        <button id="Button" style="display: none;">...in progress...</button>
+        <button id="progressButton" style="display: none;">...in progress...</button>
         <button id="signOutButton" style="display: none;">Disconnect</button>
         <button id="addNetworkButton" style="display: none; margin-top: 20px;">Add Network</button>
         <button id="getMetaMaskButton" style="display: none; margin-top: 20px;">Get MetaMask</button>
@@ -174,13 +174,11 @@
                     console.log('Ethereum successfully detected!');
                     // Access the decentralized web!
 
-
                     // Check if network is correct
                     detectedNetwork = ethereum.networkVersion
                     detectedNetwork === correctNetwork ?
                     console.log("You're on the correct network")
                         : 
-                    
                     $("#addNetworkButton").show();
                     console.log("You're on the wrong network")
                     console.log(ethereum.networkVersion +' detected when you need to be on '+ correctNetwork)
@@ -211,6 +209,7 @@
                 if (accounts.length === 0) {
                     // MetaMask is locked or the user has not connected any accounts
                     $("#connectButton").show();
+                    $("#signOutButton").hide();
                     console.log('Please connect to MetaMask.');
                 } else if (accounts[0] !== userAccount) {
                     userAccount = accounts[0];
