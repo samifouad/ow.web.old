@@ -10,26 +10,13 @@
 
 </head>
 <body>
-    <div class="container">
-
-        <h1>Coursetro Instructor</h1>
-
-        <h2 id="instructor"></h2>
-
-        <label for="name" class="col-lg-2 control-label">Instructor Name</label>
-        <input id="name" type="text">
-
-        <label for="name" class="col-lg-2 control-label">Instructor Age</label>
-        <input id="age" type="text">
-           
-        <button id="button">Update Instructor</button>
-
-
+    <div style="width:50%; margin-left:auto; margin-right: auto; margin-top: 10%;">
+        <button id="connectButton">Connect</button>
     </div>
-
     <script src="https://storageapi.fleek.co/57985936-9b65-40c9-a41c-ee4de00672af-bucket/js/jquery-3.6.0.min.js"></script>
-
+    <script src="https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js"></script>
     <script>
+        /*
         if (typeof web3 !== 'undefined') {
             web3 = new Web3(web3.currentProvider);
         } else {
@@ -38,9 +25,7 @@
             web3 = new Web3(new Web3.providers.HttpProvider("https://polygon-mumbai.infura.io/v3/289f50d5466f4cbe908c49bd1b2975a6"));
         }
 
-        web3.eth.defaultAccount = web3.eth.accounts[0];
-
-        var owContract = web3.eth.contract([
+        var ow = new web3.eth.Contract([
 	{
 		"anonymous": false,
 		"inputs": [
@@ -156,12 +141,62 @@
 		"stateMutability": "view",
 		"type": "function"
 	}
-])
-    
-        var ow = owContract.at('0xEFF30196f92b4e1140C55571Fd39faCC7337eB70');
+], '0xEFF30196f92b4e1140C55571Fd39faCC7337eB70', {
+            from: '0xCeabbdFD8660DB83c4317BDA8E352B77055DE716' // default from address
+        });
 
-        console.log(ow);
+        */
+
+        // vars
+        let detectedNetwork
+        let correctNetwork = 800001 // polygon mumbai testnet = 800001, polygon mainnet 137
+        let contractAddr = "0xEFF30196f92b4e1140C55571Fd39faCC7337eB70"
+        let userAccount 
+
+        if (window.ethereum) {
+                handleEthereum();
+        } else {
+                window.addEventListener('ethereum#initialized', handleEthereum, { once: true });
+
+            // If the event is not dispatched by the end of the timeout,
+            // the user probably doesn't have MetaMask installed.
+            setTimeout(handleEthereum, 3000); // 3 seconds
+        }
+
+        function handleEthereum() {
+            const { ethereum } = window;
+            if (ethereum && ethereum.isMetaMask) {
+                console.log('Ethereum successfully detected!');
+                // Access the decentralized web!
+
+
+                // Check if network is correct
+                detectedNetwork = ethereum.chainId
+                detectedNetwork === correctNetwork ?
+                console.log("You're on the correct network")
+                    : 
+                console.log("You're on the wrong network")
+            } else {
+                console.log('Please install MetaMask!');
+            }
+        }
+
+        function connect() {
+            ethereum
+            .request({ method: 'eth_requestAccounts' })
+            .then(handleAccountsChanged)
+            .catch((err) => {
+            if (err.code === 4001) {
+                // EIP-1193 userRejectedRequest error
+                // If this happens, the user rejected the connection request.
+                console.log('Please connect to MetaMask.');
+            } else {
+                console.error(err);
+            }
+            });
+        }
+
+        $( "connectButton" ).on( "click", connect );
     </script>
-
 </body>
 </html>
