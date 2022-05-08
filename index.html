@@ -225,19 +225,23 @@
                 .request({ method: 'eth_requestAccounts' })
                 .then(handleAccountsChanged)
                 .catch((err) => {
-                if (err.code === 4001) {
-                    // EIP-1193 userRejectedRequest error
-                    // If this happens, the user rejected the connection request.
-                    $("#connectButton").show();
-                    console.log('Please connect to MetaMask.');
-                } else {
-                    console.error(err);
-                }
+                    if (err.code === 4001) {
+                        // EIP-1193 userRejectedRequest error
+                        // If this happens, the user rejected the connection request.
+                        $("#connectButton").show();
+                        console.log('Please connect to MetaMask.');
+                    } else {
+                        console.error(err);
+                    }
                 });
             }
 
             $("#connectButton").on( "click", function(){
                 connect();
+            });
+
+            $("#signOutButton").on( "click", function(){
+                window.location.reload();
             });
         };
 
