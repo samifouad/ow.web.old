@@ -165,13 +165,7 @@
                 // Access the decentralized web!
 
                 // Check if network is correct
-                detectedNetwork = ethereum.networkVersion
-                detectedNetwork === correctNetwork ?
-                console.log("You're on the correct network")
-                    : 
-                $("#addNetworkButton").show()
-                console.log("You're on the wrong network")
-                console.log(ethereum.networkVersion +' detected when you need to be on '+ correctNetwork)
+                getNetworkAndChainId()
             } else {
                 $("#getMetaMaskButton").show();
                 console.log('Please install MetaMask!');
