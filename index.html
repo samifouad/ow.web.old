@@ -239,6 +239,53 @@
             console.error(err)
             }
         }
+
+        async function addNewNetwork () {
+            try {
+                // polygon mainnet
+                /*
+                chainId = '137'; chainId = web3.utils.toHex(chainId);
+
+                chainData = [{
+                    chainId: chainId,
+                    chainName: 'Matic(Polygon) Mainnet',
+                    nativeCurrency: { name: 'MATIC', symbol: 'MATIC', decimals: 18 },
+                    rpcUrls: ['https://polygon-rpc.com'],
+                    blockExplorerUrls: ['https://www.polygonscan.com'],
+                }];
+                */
+
+                // polygon mumbai testnet
+                chainId = '80001'; chainId = web3.utils.toHex(chainId);
+
+                chainData = [{
+                    chainId: chainId,
+                    chainName: 'Polygon Mumbai Testnet',
+                    nativeCurrency: { name: 'MATIC', symbol: 'MATIC', decimals: 18 },
+                    rpcUrls: ['https://rpc-mumbai.maticvigil.com'],
+                    blockExplorerUrls: ['https:/mumbai.polygonscan.com'],
+                }];
+
+                try {
+                    await window.ethereum.request({
+                    method: 'wallet_switchEthereumChain',
+                    params: [{ chainId: web3.utils.toHex(chainId) }]
+                    });
+                } catch (err) {
+                    // This error code indicates that the chain has not been added to MetaMask
+                    if (err.code === 4902) {
+                    await window.ethereum.request({
+                        method: 'wallet_addEthereumChain',
+                        params: chainData,
+                    });
+                    }
+                }
+                window.location.reload();
+
+            } catch (err) {
+            console.error(err)
+            }
+        }
         
         const initialize = () => {
 
