@@ -149,7 +149,7 @@
 
         // vars
         let detectedNetwork
-        let correctNetwork = '0x13881' // polygon mumbai testnet = 0x13881, polygon mainnet 0x137
+        let correctNetwork = 800001 // polygon mumbai testnet = 800001, polygon mainnet 137
         let contractAddr = "0xEFF30196f92b4e1140C55571Fd39faCC7337eB70"
         let userAccount 
 
@@ -171,7 +171,7 @@
 
 
                 // Check if network is correct
-                detectedNetwork = ethereum.chainId
+                detectedNetwork = ethereum.networkVersion
                 detectedNetwork === correctNetwork ?
                 console.log("You're on the correct network")
                     : 
