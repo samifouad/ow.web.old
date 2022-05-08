@@ -173,6 +173,8 @@
 
             if (window.ethereum) {
                     handleEthereum();
+                    // Check if network is correct
+                    getNetworkAndChainId()
             } else {
                     window.addEventListener('ethereum#initialized', handleEthereum, { once: true });
 
