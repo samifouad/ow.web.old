@@ -185,11 +185,6 @@
         /**********************************************************/
         /* Handle chain (network) and chainChanged (per EIP-1193) */
         /**********************************************************/
-
-        const chainId = await ethereum.request({ method: 'eth_chainId' });
-        console.log(chainId)
-        handleChainChanged(chainId);
-
         ethereum.on('chainChanged', handleChainChanged);
 
         function handleChainChanged(_chainId) {
