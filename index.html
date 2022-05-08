@@ -20,15 +20,6 @@
     <script src="https://storageapi.fleek.co/57985936-9b65-40c9-a41c-ee4de00672af-bucket/js/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js"></script>
     <script>
-        // init web3 lib
-        if (typeof web3 !== 'undefined') {
-            web3 = new Web3(web3.currentProvider);
-        } else {
-            // set the provider you want from Web3.providers
-            // TODO: add redundancy in case Infura is down/censored/offline
-            web3 = new Web3(new Web3.providers.HttpProvider("https://polygon-mumbai.infura.io/v3/289f50d5466f4cbe908c49bd1b2975a6"));
-        }
-
         // vars
         let detectedNetwork
         let correctNetwork = '80001' // polygon mumbai testnet = 80001, polygon mainnet '137'
@@ -135,10 +126,9 @@
                 */
 
                 // polygon mumbai testnet
-                chainId = '80001'; chainId = web3.utils.toHex(chainId);
-
+                // chainId = '80001';
                 chainData = [{
-                    chainId: chainId,
+                    chainId: '0x13881',
                     chainName: 'Polygon Mumbai Testnet',
                     nativeCurrency: { name: 'MATIC', symbol: 'MATIC', decimals: 18 },
                     rpcUrls: ['https://rpc-mumbai.maticvigil.com'],
@@ -148,7 +138,7 @@
                 try {
                     await window.ethereum.request({
                     method: 'wallet_switchEthereumChain',
-                    params: [{ chainId: web3.utils.toHex(chainId) }]
+                    params: [{ chainId: '0x13881' }]
                     });
                 } catch (err) {
                     // This error code indicates that the chain has not been added to MetaMask
