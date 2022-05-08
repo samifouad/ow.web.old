@@ -20,7 +20,7 @@
     <script src="https://storageapi.fleek.co/57985936-9b65-40c9-a41c-ee4de00672af-bucket/js/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js"></script>
     <script>
-        /*
+        // init web3 lib
         if (typeof web3 !== 'undefined') {
             web3 = new Web3(web3.currentProvider);
         } else {
@@ -29,127 +29,6 @@
             web3 = new Web3(new Web3.providers.HttpProvider("https://polygon-mumbai.infura.io/v3/289f50d5466f4cbe908c49bd1b2975a6"));
         }
 
-        var ow = new web3.eth.Contract([
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "createdBy",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "string",
-				"name": "name",
-				"type": "string"
-			},
-			{
-				"indexed": true,
-				"internalType": "string",
-				"name": "id",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "time",
-				"type": "uint256"
-			}
-		],
-		"name": "newUser",
-		"type": "event"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_key",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_id",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_time",
-				"type": "uint256"
-			}
-		],
-		"name": "set",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_key",
-				"type": "string"
-			}
-		],
-		"name": "get",
-		"outputs": [
-			{
-				"components": [
-					{
-						"internalType": "string",
-						"name": "id",
-						"type": "string"
-					},
-					{
-						"internalType": "uint256",
-						"name": "time",
-						"type": "uint256"
-					}
-				],
-				"internalType": "struct Example.Store",
-				"name": "",
-				"type": "tuple"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"name": "purchases",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "id",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "time",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	}
-], '0xEFF30196f92b4e1140C55571Fd39faCC7337eB70', {
-            from: '0xCeabbdFD8660DB83c4317BDA8E352B77055DE716' // default from address
-        });
-
-        */
         // vars
         let detectedNetwork
         let correctNetwork = '80001' // polygon mumbai testnet = 80001, polygon mainnet '137'
