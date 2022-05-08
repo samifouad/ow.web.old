@@ -31,7 +31,7 @@
 
             get checkNetwork() {
                 getNetworkAndChainId();
-                if (correctNetwork != currentNetId){
+                if (this.correctNetwork != this.currentNetId){
                     $("#addNetworkButton").show();
                 } else {
                     $("#addNetworkButton").hide();
