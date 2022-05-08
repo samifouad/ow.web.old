@@ -166,6 +166,10 @@
 
                 // Check if network is correct
                 getNetworkAndChainId()
+
+                if (correctNetwork != currentNetId){
+                    $("#addNetworkButton").show();
+                }
             } else {
                 $("#getMetaMaskButton").show();
                 console.log('Please install MetaMask!');
