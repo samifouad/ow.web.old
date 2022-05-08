@@ -313,6 +313,10 @@
                 connect();
             });
 
+            $("#addNetworkButton").on( "click", function(){
+                addNewNetwork();
+            });
+
             $("#signOutButton").on( "click", function(){
                 window.location.reload();
             });
