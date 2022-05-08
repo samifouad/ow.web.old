@@ -29,7 +29,8 @@
             currentChainId: '',
             currentNetId: '',
 
-            get detectedNetwork() {
+            get checkNetwork() {
+                getNetworkAndChainId();
                 if (correctNetwork != currentNetId){
                     $("#addNetworkButton").show();
                 } else {
@@ -202,7 +203,7 @@
                 window.location.reload();
             });
 
-            if (correctNetwork != currentNetId){
+            if (officerWatch.correctNetwork != officerWatch.currentNetId){
                 $("#addNetworkButton").show();
             } else {
                 $("#addNetworkButton").hide();
