@@ -12,6 +12,10 @@
 <body>
     <div style="width:50%; margin-left:auto; margin-right: auto; margin-top: 10%;">
         <button id="connectButton">Connect</button>
+        <button id="Button" style="display: none;">...in progress...</button>
+        <button id="signOutButton" style="display: none;">Disconnect</button>
+        <button id="addNetworkButton" style="display: none; margin-top: 20px;">Add Network</button>
+        <button id="getMetaMaskButton" style="display: none; margin-top: 20px;">Get MetaMask</button>
     </div>
     <script src="https://storageapi.fleek.co/57985936-9b65-40c9-a41c-ee4de00672af-bucket/js/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js"></script>
@@ -176,9 +180,12 @@
                     detectedNetwork === correctNetwork ?
                     console.log("You're on the correct network")
                         : 
+                    
+                    $("#addNetworkButton").show();
                     console.log("You're on the wrong network")
                     console.log(ethereum.networkVersion +' detected when you need to be on '+ correctNetwork)
                 } else {
+                    $("#getMetaMaskButton").show();
                     console.log('Please install MetaMask!');
                 }
             }
@@ -203,6 +210,7 @@
             function handleAccountsChanged(accounts) {
                 if (accounts.length === 0) {
                     // MetaMask is locked or the user has not connected any accounts
+                    $("#connectButton").show();
                     console.log('Please connect to MetaMask.');
                 } else if (accounts[0] !== userAccount) {
                     userAccount = accounts[0];
@@ -219,6 +227,7 @@
                 if (err.code === 4001) {
                     // EIP-1193 userRejectedRequest error
                     // If this happens, the user rejected the connection request.
+                    $("#connectButton").show();
                     console.log('Please connect to MetaMask.');
                 } else {
                     console.error(err);
