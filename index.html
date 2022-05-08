@@ -142,17 +142,17 @@
                     });
                 } catch (err) {
                     // This error code indicates that the chain has not been added to MetaMask
-                    if (err.code === 4902) {
-                    await window.ethereum.request({
-                        method: 'wallet_addEthereumChain',
-                        params: chainData,
-                    });
+                    if (err.code === 4902 || err.code === 4001) {
+                        await window.ethereum.request({
+                            method: 'wallet_addEthereumChain',
+                            params: chainData,
+                        });
                     }
                 }
                 window.location.reload();
 
             } catch (err) {
-            console.error(err)
+                console.error(err)
             }
         }
         
