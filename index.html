@@ -21,12 +21,22 @@
     <script src="https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js"></script>
     <script>
         // vars
-        let detectedNetwork
-        let correctNetwork = '80001' // polygon mumbai testnet = 80001, polygon mainnet '137'
-        let contractAddr = "0xEFF30196f92b4e1140C55571Fd39faCC7337eB70"
-        let userAccount
-        let currentChainId 
-        let currentNetId  
+        let officerWatch = {
+            detectedNetwork: '',
+            correctNetwork: '80001', // polygon mumbai testnet = 80001, polygon mainnet '137'
+            contractAddr: "0xEFF30196f92b4e1140C55571Fd39faCC7337eB70",
+            userAccount: '',
+            currentChainId: '',
+            currentNetId: ''
+
+            get detectedNetwork() {
+                if (correctNetwork != currentNetId){
+                    $("#addNetworkButton").show();
+                } else {
+                    $("#addNetworkButton").hide();
+                }
+            }
+        }; 
         
         function handleEthereum() {
             const { ethereum } = window;
@@ -37,7 +47,7 @@
                 // Check if network is correct
                 getNetworkAndChainId()
 
-                if (correctNetwork != currentNetId){
+                if (officerWatch.correctNetwork != officerWatch.currentNetId){
                     $("#addNetworkButton").show();
                 } else {
                     $("#addNetworkButton").hide();
@@ -62,11 +72,11 @@
                 $("#signOutButton").hide();
                 console.log('Please connect to MetaMask.');
             } else if (accounts[0] !== userAccount) {
-                userAccount = accounts[0];
+                officerWatch.userAccount = accounts[0];
                 // Do any other work!
                 $("#connectButton").hide();
                 $("#signOutButton").show();
-                console.log(userAccount)
+                console.log(officerWatch.userAccount)
             }
         }
 
@@ -87,11 +97,11 @@
         }
 
         function handleNewChain (chainId) {
-            currentChainId = chainId
+            officerWatch.currentChainId = chainId
         }
 
         function handleNewNetwork (networkId) {
-            currentNetId = networkId
+            officerWatch.currentNetId = networkId
         }
 
         async function getNetworkAndChainId () {
@@ -140,6 +150,8 @@
                     method: 'wallet_switchEthereumChain',
                     params: [{ chainId: '0x13881' }]
                     });
+
+                    $("#addNetworkButton").hide();
                 } catch (err) {
                     // This error code indicates that the chain has not been added to MetaMask
                     if (err.code === 4902 || err.code === 4001) {
