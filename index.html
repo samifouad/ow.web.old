@@ -72,7 +72,7 @@
                 $("#connectButton").show();
                 $("#signOutButton").hide();
                 console.log('Please connect to MetaMask.');
-            } else if (accounts[0] !== userAccount) {
+            } else if (accounts[0] !== officerWatch.userAccount) {
                 officerWatch.userAccount = accounts[0];
                 // Do any other work!
                 $("#connectButton").hide();
