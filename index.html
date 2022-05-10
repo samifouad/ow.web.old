@@ -123,47 +123,33 @@
 
         async function addNewNetwork () {
             try {
-                // polygon mainnet
-                /*
-                chainId = '137'; chainId = web3.utils.toHex(chainId);
-
-                chainData = [{
-                    chainId: chainId,
-                    chainName: 'Matic(Polygon) Mainnet',
-                    nativeCurrency: { name: 'MATIC', symbol: 'MATIC', decimals: 18 },
-                    rpcUrls: ['https://polygon-rpc.com'],
-                    blockExplorerUrls: ['https://www.polygonscan.com'],
-                }];
-                */
-
-                // polygon mumbai testnet
-                // chainId = '80001'; // 0x13881
-                chainData = [{
-                    chainId: '0x13881',
-                    chainName: 'Polygon Mumbai Testnet',
-                    nativeCurrency: { name: 'MATIC', symbol: 'MATIC', decimals: 18 },
-                    rpcUrls: ['https://rpc-mumbai.maticvigil.com'], 
-                    blockExplorerUrl: ['https:/mumbai.polygonscan.com'],
-                }];
-
-                try {
-                    await window.ethereum.request({
+                await ethereum.request({
                     method: 'wallet_switchEthereumChain',
-                    params: [{ chainId: '0x13881' }]
-                    });
-                } catch (err) {
-                    // This error code indicates that the chain has not been added to MetaMask
-                    if (err.code === 4902 ) {
-                        await window.ethereum.request({
+                    params: [{ chainId: '0x13881' }], // Hexadecimal version of 80001, prefixed with 0x
+                });
+            } catch (error) {
+                if (error.code === 4902) {
+                    try {
+                        await ethereum.request({
                             method: 'wallet_addEthereumChain',
-                            params: chainData,
+                            params: [{ 
+                                chainId: '0x13881', // Hexadecimal version of 80001, prefixed with 0x
+                                chainName: "POLYGON Mumbai",
+                                nativeCurrency: {
+                                    name: "MATIC",
+                                    symbol: "MATIC",
+                                    decimals: 18,
+                                },
+                                rpcUrls: ["https://polygon-mumbai.infura.io/v3/289f50d5466f4cbe908c49bd1b2975a6"],
+                                blockExplorerUrls: ["https://explorer-mumbai.maticvigil.com/"],
+                                iconUrls: [""],
+                        
+                            }],
                         });
+                    } catch (addError){
+                        console.log('Did not add network');
                     }
                 }
-                window.location.reload();
-
-            } catch (err) {
-                console.error(err)
             }
         }
         
