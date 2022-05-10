@@ -139,23 +139,21 @@
                 // polygon mumbai testnet
                 // chainId = '80001'; // 0x13881
                 chainData = [{
-                    chainId: '80001',
+                    chainId: '0x13881',
                     chainName: 'Polygon Mumbai Testnet',
                     nativeCurrency: { name: 'MATIC', symbol: 'MATIC', decimals: 18 },
-                    rpcUrls: ['https://rpc-mumbai.maticvigil.com'],
+                    rpcUrls: ['https://rpc-mumbai.maticvigil.com'], 
                     blockExplorerUrl: ['https:/mumbai.polygonscan.com'],
                 }];
 
                 try {
                     await window.ethereum.request({
                     method: 'wallet_switchEthereumChain',
-                    params: [{ chainId: '80001' }]
+                    params: [{ chainId: '0x13881' }]
                     });
-
-                    $("#addNetworkButton").hide();
                 } catch (err) {
                     // This error code indicates that the chain has not been added to MetaMask
-                    if (err.code === 4902 || err.code === 4001) {
+                    if (err.code === 4902 ) {
                         await window.ethereum.request({
                             method: 'wallet_addEthereumChain',
                             params: chainData,
