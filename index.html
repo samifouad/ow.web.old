@@ -137,9 +137,9 @@
                 */
 
                 // polygon mumbai testnet
-                // chainId = '80001';
+                // chainId = '80001'; // 0x13881
                 chainData = [{
-                    chainId: '0x13881',
+                    chainId: '80001',
                     chainName: 'Polygon Mumbai Testnet',
                     nativeCurrency: { name: 'MATIC', symbol: 'MATIC', decimals: 18 },
                     rpcUrls: ['https://rpc-mumbai.maticvigil.com'],
@@ -149,7 +149,7 @@
                 try {
                     await window.ethereum.request({
                     method: 'wallet_switchEthereumChain',
-                    params: [{ chainId: '0x13881' }]
+                    params: [{ chainId: '80001' }]
                     });
 
                     $("#addNetworkButton").hide();
